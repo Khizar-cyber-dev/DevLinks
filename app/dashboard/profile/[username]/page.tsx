@@ -104,27 +104,28 @@ export default async function ProfilePage({ params }: { params: Props["params"] 
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             Projects
           </h2>
-          {/* Optional: Show view all if needed */}
         </div>
 
         {fullUser.projects.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {fullUser.projects.map((project) => (
-              <ProjectCard
-                key={project.id ?? Math.random()}
-                project={{
-                  ...project,
-                  user: {
-                    id: fullUser.id,
-                    name: fullUser.name,
-                    username: fullUser.username,
-                    avatarUrl: fullUser.avatarUrl ?? null,
-                  },
-                  createdAt: project.createdAt.toString(),
-                }}
-                currentUserId={currentUser?.id ?? null}
-              />
-            ))}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-2 gap-8">
+              {fullUser.projects.map((project) => (
+                <ProjectCard
+                  key={project.id ?? Math.random()}
+                  project={{
+                    ...project,
+                    user: {
+                      id: fullUser.id,
+                      name: fullUser.name,
+                      username: fullUser.username,
+                      avatarUrl: fullUser.avatarUrl ?? null,
+                    },
+                    createdAt: project.createdAt.toString(),
+                  }}
+                  currentUserId={currentUser?.id ?? null}
+                />
+              ))}
+            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-12 text-center">

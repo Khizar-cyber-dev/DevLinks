@@ -1,12 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
 import { useDebounce } from '@/hooks/useDebounce'; 
-import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { Project, User } from '@/types';
 import ProjectCard from '@/components/ProjectCard';
 import { Search } from 'lucide-react';
@@ -96,53 +93,8 @@ const ExplorePage = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="border rounded-lg overflow-hidden">
-                <div className="p-6 bg-muted/50 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <Skeleton className="h-12 w-12 rounded-full" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[100px]" />
-                      <Skeleton className="h-3 w-[80px]" />
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Skeleton className="h-9 w-9 rounded-md" />
-                    <Skeleton className="h-9 w-9 rounded-md" />
-                  </div>
-                </div>
-
-                {/* Content Skeleton */}
-                <div className="p-6 space-y-4">
-                  <Skeleton className="h-7 w-3/4" />
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-4/5" />
-                    <Skeleton className="h-4 w-3/4" />
-                  </div>
-
-                  {/* Image placeholder */}
-                  <Skeleton className="h-48 w-full rounded-lg" />
-
-                  {/* Tech stack placeholders */}
-                  <div>
-                    <Skeleton className="h-4 w-[80px] mb-2" />
-                    <div className="flex flex-wrap gap-2">
-                      {[...Array(4)].map((_, i) => (
-                        <Skeleton key={i} className="h-6 w-16 rounded-full" />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Button placeholders */}
-                  <div className="flex gap-3 pt-2">
-                    <Skeleton className="h-10 w-24" />
-                    <Skeleton className="h-10 w-24" />
-                  </div>
-                </div>
-              </div>
-          ))}
+          <div className='flex justify-center items-center'>
+              ...Loading.
           </div>
         ) : projects.length > 0 ? (
           <div className="grid grid-cols-2 gap-8">
