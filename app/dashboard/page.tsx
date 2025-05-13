@@ -1,4 +1,4 @@
-import { getAllUser } from '@/app/actions/getAllUser';
+
 import Link from 'next/link';
 import getAllProjects from '@/app/actions/getAllProjects';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -8,6 +8,7 @@ import { User } from '../generated/prisma';
 import ProjectCard from '@/components/ProjectCard';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import { getAllUser } from '../actions/getAllUser';
 
 const Page = async () => {
   const currentUser = await getCurrentUser();
