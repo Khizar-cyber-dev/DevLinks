@@ -50,7 +50,7 @@ export default async function ProfilePage({ params }: { params: Props["params"] 
               <p className="text-gray-600 dark:text-gray-400">@{fullUser.username}</p>
             </div>
 
-            {currentUser?.id === fullUser?.id && (
+            {currentUser?.id !== fullUser?.id && (
               <FollowButton userId={fullUser.id} isFollowing={isFollowing} />
             )}
           </div>

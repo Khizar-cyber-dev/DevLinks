@@ -1,6 +1,5 @@
 'use client';
 
-
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Icons } from '../Icon';
@@ -37,4 +36,4 @@ export function DeleteButton({ projectId }: { projectId: string }) {
       Delete
     </Button>
   );
-}
+};

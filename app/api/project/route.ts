@@ -12,30 +12,13 @@ export async function POST(req: Request) {
     }
 
     const user = await getCurrentUser();
+    
     if (!user) {
       return new NextResponse('User not found', { status: 404 });
     }
 
-    const formData = await req.formData();
-    const title = formData.get('title') as string;
-    const description = formData.get('description') as string;
-    const techStacks = JSON.parse(formData.get('techStacks') as string);
-    const image = formData.get('image') as File | null;
-    const githubUrl = formData.get('githubUrl') as string;
-    const liveUrl = formData.get('liveUrl') as string;
-
-    if (!title || !description) {
-      return new NextResponse('Missing required fields', { status: 400 });
-    }
-
-    let imageUrl: string | null = null;
-    if (image) {
-      const buffer = await image.arrayBuffer();
-      const base64 = Buffer.from(buffer).toString('base64');
-      imageUrl = `data:${image.type};base64,${base64}`;
-    }
-
-    console.log({ githubUrl, liveUrl });
+    const reqBody = await req.json();
+    const { title, description, techStacks, githubUrl, liveUrl, imageUrl } = reqBody;
 
     const project = await prisma.project.create({
       data: {

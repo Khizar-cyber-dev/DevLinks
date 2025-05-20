@@ -103,28 +103,39 @@ export default function CreateProjectPage() {
 
   const onSubmit = async (data: ProjectFormValues) => {
     try {
-      const formData = new FormData();
-      formData.append('title', data.title);
-      formData.append('description', data.description);
-      formData.append('techStacks', JSON.stringify(data.techStacks));
-      
-      if (data.image) {
-        console.log('Adding image to form data');
-        formData.append('image', data.image);
+      let imageUrl = null;
+
+      if (data.image && typeof data.image !== "string") {
+        // Convert image file to base64
+        const file = data.image as File;
+        const reader = new FileReader();
+        imageUrl = await new Promise<string>((resolve, reject) => {
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      } else if (typeof data.image === "string") {
+        imageUrl = data.image;
       }
 
-      if (data.githubUrl) {
-        formData.append('githubUrl', data.githubUrl);
-      }
-
-      if (data.liveUrl) {
-        formData.append('liveUrl', data.liveUrl);
+      const payload: any = {
+        title: data.title,
+        description: data.description,
+        techStacks: data.techStacks,
+        githubUrl: data.githubUrl,
+        liveUrl: data.liveUrl,
+      };
+      if (imageUrl) {
+        payload.imageUrl = imageUrl;
       }
 
       const response = await fetch(projectId ? `/api/project/${projectId}` : '/api/project', {
         method: projectId ? 'PUT' : 'POST',
-        body: formData,
-      });      
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
       const responseData = await response.json();
 

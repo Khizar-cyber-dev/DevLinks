@@ -28,33 +28,18 @@ export async function PUT(req: NextRequest, { params }: { params: { projectId: s
     const { projectId } = params;
   
     try {
-      const formData = await req.formData();
-  
-      const title = formData.get('title');
-      const description = formData.get('description');
-      const techStacksRaw = formData.get('techStacks');
-      const githubUrl = formData.get('githubUrl');
-      const liveUrl = formData.get('liveUrl');
-      const image = formData.get('image') as File | null;
-  
-      if (!title || !description || !techStacksRaw) {
-        return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+      const reqBody = await req.json();
+      const { title, description, techStacks, githubUrl, liveUrl, imageUrl } = reqBody;
+
+      let finalImageUrl = imageUrl;
+      if (typeof imageUrl === 'undefined') {
+        const existingProject = await prisma.project.findUnique({
+          where: { id: projectId },
+          select: { imageUrl: true }
+        });
+        finalImageUrl = existingProject?.imageUrl ?? null;
       }
-  
-      const techStacks = JSON.parse(techStacksRaw as string);
-  
-      const existingProject = await prisma.project.findUnique({
-        where: { id: projectId },
-      });
-  
-      let imageUrl = existingProject?.imageUrl ?? null;
-  
-      if (image && image.size > 0) {
-        const buffer = await image.arrayBuffer();
-        const base64 = Buffer.from(buffer).toString('base64');
-        imageUrl = `data:${image.type};base64,${base64}`;
-      }
-  
+
       const updatedProject = await prisma.project.update({
         where: { id: projectId },
         data: {
@@ -62,7 +47,7 @@ export async function PUT(req: NextRequest, { params }: { params: { projectId: s
           description: description as string,
           githubUrl: githubUrl ? (githubUrl as string) : null,
           liveUrl: liveUrl ? (liveUrl as string) : null,
-          imageUrl,
+          imageUrl: finalImageUrl,
         },
       });
   

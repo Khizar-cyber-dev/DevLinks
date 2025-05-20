@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import getAllProjects from '@/app/actions/getAllProjects';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
