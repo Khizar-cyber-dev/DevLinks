@@ -17,7 +17,6 @@ export default async function Home() {
 
   const users = await prisma.user.findMany({
     select: { username: true, name: true },
-     
   });
 
   return <HomeComponent users={users}/>;
