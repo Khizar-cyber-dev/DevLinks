@@ -10,14 +10,14 @@ import { redirect } from 'next/navigation';
 import { getAllUser } from '../actions/getAllUser';
 
 const Page = async () => {
-  const currentUser = await getCurrentUser();
-  let data = await getAllUser();
-  const projects = await getAllProjects();
- 
   const { userId } = await auth();
   if(!userId){
     redirect('/signIn');
   }
+  
+  const currentUser = await getCurrentUser();
+  let data = await getAllUser();
+  const projects = await getAllProjects();
 
   return (
     <div className="container mx-auto px-4 py-8">

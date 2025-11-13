@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
             </button>
             <SignedOut>
               <Link 
-                href="#" 
+                href="/signIn" 
                 className={`px-4 py-2 rounded-md font-medium ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
               >
                 <SignInButton />

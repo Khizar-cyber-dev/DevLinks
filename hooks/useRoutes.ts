@@ -8,8 +8,7 @@ import {
   FiGrid, 
   FiBookmark, 
   FiCompass, 
-  FiUser, 
-  FiSettings, 
+  FiUser,  
   FiLogOut,
 } from "react-icons/fi";
 import { useAuth } from "@clerk/nextjs";
@@ -62,12 +61,6 @@ export function useRoutes() {
       icon: React.createElement(FiUser, { className: "text-lg" }),
       activeIcon: React.createElement(FiUser, { className: "text-lg text-blue-400" })
     },
-    // {
-    //   path: "/dashboard/settings",
-    //   name: "Settings",
-    //   icon: React.createElement(FiSettings, { className: "text-lg" }),
-    //   activeIcon: React.createElement(FiSettings, { className: "text-lg text-blue-400" })
-    // },
     {
       path: "/",
       name: "Logout",

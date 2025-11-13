@@ -10,16 +10,17 @@ export default async function Home() {
   
   if (userId) {
     await syncUser(userId);
+    redirect('/dashboard');
   }
 
-  const currentUser = await isAuthenticated();
-  if(currentUser) redirect('/dashboard')
+  // const currentUser = await isAuthenticated();
+  // if(currentUser) redirect('/dashboard')
 
-  const users = await prisma.user.findMany({
-    select: { username: true, name: true },
-  });
+  // const users = await prisma.user.findMany({
+  //   select: { username: true, name: true },
+  // });
 
-  return <HomeComponent users={users}/>;
+  return <HomeComponent />;
 }
 
 export async function isAuthenticated() {

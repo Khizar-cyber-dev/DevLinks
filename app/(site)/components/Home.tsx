@@ -6,9 +6,8 @@ import Main from "./Main"
 import Footer from "./Footer"
 import { MinimalUser } from "@/types"
 
-export default function HomeComponent({ users }: { users: MinimalUser[] }) {
+export default function HomeComponent() {
   const [darkMode, setDarkMode] = useState(false);
-  console.log("users", users);
 
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches

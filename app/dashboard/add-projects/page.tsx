@@ -125,6 +125,7 @@ export default function CreateProjectPage() {
         githubUrl: data.githubUrl,
         liveUrl: data.liveUrl,
       };
+      
       if (imageUrl) {
         payload.imageUrl = imageUrl;
       }
