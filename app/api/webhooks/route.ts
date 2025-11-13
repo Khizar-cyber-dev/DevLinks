@@ -15,7 +15,7 @@ interface ClerkEvent {
 }
 
 export async function POST(req: NextRequest) {
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
+  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
   if (!WEBHOOK_SECRET) throw new Error("Missing CLERK_WEBHOOK_SECRET");
 
   const headersList = await import("next/headers").then((m) => m.headers());
