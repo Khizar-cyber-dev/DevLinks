@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Link as LinkIcon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
-import { Skeleton } from '@/components/ui/skeleton';
 import ProjectCard from '@/components/ProjectCard';
+import LoadingPage from '../loading';
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
@@ -146,17 +146,8 @@ export default function ProfilePage() {
     }
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <p className="text-lg text-gray-600">Failed to load profile data</p>
-          <Button className="mt-4" onClick={() => window.location.reload()}>
-            Try Again
-          </Button>
-        </div>
-      </div>
-    );
+  if(loading) {
+    return <LoadingPage />;
   }
 
   return (
@@ -182,8 +173,8 @@ export default function ProfilePage() {
             <div className="flex flex-col sm:flex-row items-center sm:items-start">
               <div className="relative -mt-16">
                 <Avatar className="h-24 w-24 rounded-full border-4 border-white bg-white">
-                  <AvatarImage src={user.avatarUrl || 'https://avatar.vercel.sh/default'} />
-                  <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                  <AvatarImage src={user!.avatarUrl || 'https://avatar.vercel.sh/default'} />
+                  <AvatarFallback>{user!.name.charAt(0)}</AvatarFallback>
                 </Avatar>
               </div>
 
@@ -208,8 +199,8 @@ export default function ProfilePage() {
                   </div>
                 ) : (
                   <div>
-                    <h1 className="text-xl sm:text-2xl font-bold">{user.name}</h1>
-                    <p className="text-gray-600">@{user.username}</p>
+                    <h1 className="text-xl sm:text-2xl font-bold">{user!.name}</h1>
+                    <p className="text-gray-600">@{user!.username}</p>
                   </div>
                 )}
               </div>
@@ -252,7 +243,7 @@ export default function ProfilePage() {
               />
             ) : (
               <p className="mt-4 text-gray-700 text-center sm:text-left">
-                {user.bio || (
+                {user!.bio || (
                   <span className="text-gray-400 italic">No bio yet. Add a bio to tell others about yourself.</span>
                 )}
               </p>
@@ -273,7 +264,7 @@ export default function ProfilePage() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              <p className="text-gray-500 break-all">{user.email}</p>
+              <p className="text-gray-500 break-all">{user!.email}</p>
             </div>
           </div>
 
@@ -338,8 +329,8 @@ export default function ProfilePage() {
             )}
 
             <div className="space-y-3">
-              {(user.links || []).length > 0 ? (
-                (user.links || []).map((link) => (
+              {(user!.links || []).length > 0 ? (
+                (user!.links || []).map((link) => (
                   <div
                     key={link.id}
                     className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors gap-2"
