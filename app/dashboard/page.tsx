@@ -3,7 +3,7 @@ import getAllProjects from '@/app/actions/getAllProjects';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import getCurrentUser from '@/app/actions/getCurrentUser';
-import { User } from '../generated/prisma';
+import type { User } from '@prisma/client';
 import ProjectCard from '@/components/ProjectCard';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';

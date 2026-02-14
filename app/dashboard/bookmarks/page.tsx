@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import { getBookmarkedProjects } from '@/app/actions/getBookmarkedProjects';
 import ProjectCard from '@/components/ProjectCard';
