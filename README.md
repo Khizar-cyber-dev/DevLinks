@@ -1,7 +1,5 @@
 # DevLinks
 
-![DevLinks Logo](https://via.placeholder.com/150x50?text=DevLinks) <!-- Replace with actual logo if available -->
-
 **DevLinks** is a cutting-edge, full-stack web application built with modern technologies, designed to empower developers to showcase their projects, connect with peers, and build a vibrant community. Whether you're a seasoned developer or just starting out, DevLinks provides a seamless platform to share your work, discover inspiring projects, and network with like-minded individuals.
 
 ## 🚀 Features
