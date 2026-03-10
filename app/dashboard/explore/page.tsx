@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Project, User } from '@/types';
 import ProjectCard from '@/components/ProjectCard';
-import { Search } from 'lucide-react';
+import { Loader2, Search } from 'lucide-react';
 
 const ExplorePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -94,7 +94,7 @@ const ExplorePage = () => {
 
         {loading ? (
           <div className='flex justify-center items-center'>
-              ...Loading.
+              <Loader2 className='animate-spin h-8 w-8 text-muted-foreground' />
           </div>
         ) : projects.length > 0 ? (
           <div className="grid grid-cols-2 gap-8">

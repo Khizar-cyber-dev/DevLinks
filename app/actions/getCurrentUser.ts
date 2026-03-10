@@ -4,7 +4,7 @@ import { currentUser, User } from '@clerk/nextjs/server';
 const getCurrentUser = async () => {
   try {
     const user: User | null = await currentUser();
-    console.log('Clerk User:', user);
+    // console.log('Clerk User:', user);
 
     if (!user) {
       console.log('No Clerk user found');
@@ -16,7 +16,7 @@ const getCurrentUser = async () => {
         clerkId: user.id,
       },
     });
-    console.log('Database User:', fetchedUser);
+    // console.log('Database User:', fetchedUser);
 
     if (!fetchedUser) {
       console.log('No database user found for clerkId:', user.id);

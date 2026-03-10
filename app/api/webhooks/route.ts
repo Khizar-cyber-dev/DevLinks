@@ -37,12 +37,12 @@ export async function POST(req: NextRequest) {
       "svix-signature": svixSignature,
     }) as ClerkEvent;
 
-    console.log("✅ Webhook event received:", evt.type);
+    console.log("Webhook event received:", evt.type);
 
     const { id, email_addresses, first_name, last_name, username, image_url } = evt.data;
 
     switch (evt.type) {
-      // ✅ USER CREATED
+      // USER CREATED
       case "user.created": {
         await prisma.user.create({
           data: {
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
         break;
       }
 
-      // ✅ USER UPDATED
+      // USER UPDATED
       case "user.updated": {
         await prisma.user.update({
           where: { clerkId: id },
@@ -68,26 +68,26 @@ export async function POST(req: NextRequest) {
             avatarUrl: image_url || undefined,
           },
         });
-        console.log("✏️ User updated in DB:", id);
+        console.log("User updated in DB:", id);
         break;
       }
 
-      // ✅ USER DELETED
+      // USER DELETED
       case "user.deleted": {
         await prisma.user.delete({
           where: { clerkId: id },
         });
-        console.log("🗑️ User deleted in DB:", id);
+        console.log("User deleted in DB:", id);
         break;
       }
 
       default:
-        console.log("ℹ️ Unhandled Clerk event:", evt.type);
+        console.log("Unhandled Clerk event:", evt.type);
     }
 
     return new Response("Webhook handled successfully", { status: 200 });
   } catch (err) {
-    console.error("❌ Error verifying or handling webhook:", err);
+    console.error("Error verifying or handling webhook:", err);
     return new Response("Error handling webhook", { status: 400 });
   }
 }
